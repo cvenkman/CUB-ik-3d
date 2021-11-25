@@ -12,6 +12,19 @@
 #include <fcntl.h>
 #include "libft/libft.h"
 #include <sys/errno.h>
+# include "mlx/mlx.h"
+
+typedef struct	s_win //структура для окна
+{
+	void		*mlx;
+	void		*win;
+}				  t_win;
+
+typedef struct	s_all // структура для всего вместе
+{
+	t_win		*window;
+	char		**map;
+}				  t_all;
 
 int		map_check(int	argc,char **argv);
 int		get_next_line(int fd, char **line);
