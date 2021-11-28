@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 			ft_lstadd_back(&map_list, ft_lstnew(cur_str));
 	ft_lstadd_back(&map_list, ft_lstnew(cur_str));
 	close(fd);
-	map = list_to_map(&map_list, ft_lstsize(map_list), &data);//получился двумерный массив и в дате все текстуры, теперь чекаем их
-	
+	map = list_to_map(&map_list, ft_lstsize(map_list), &data);//получился двумерный массив и в дате все текстуры
+	//while (1);
 	return (0);
 }
