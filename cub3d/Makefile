@@ -2,7 +2,8 @@ NAME = cub3d
 
 SRCS =	main.c \
 		map_check.c \
-		get_next_line.c
+		get_next_line.c \
+		nazvanie_pridumayu_potom.c	mini_map.c
 
 SRCS_PATH = srcs/
 
@@ -23,7 +24,6 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(MAKE) -C mlx
 	make -C libft/
 	$(CC) $(CFLAGS) $(MLX_FLAGS) -o $(NAME) $(OBJS) $(FT)
 
