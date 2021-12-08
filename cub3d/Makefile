@@ -3,7 +3,9 @@ NAME = cub3d
 SRCS =	main.c \
 		map_check.c \
 		get_next_line.c \
-		nazvanie_pridumayu_potom.c	mini_map.c
+		mini_map.c \
+		q.c
+#nazvanie_pridumayu_potom.c	
 
 SRCS_PATH = srcs/
 
@@ -11,7 +13,7 @@ OBJS = $(addprefix srcs/,$(SRCS:.c=.o))
 
 CC = gcc
 
-CFLAGS = -Wall
+CFLAGS =
 
 FT = -L libft -lft
 

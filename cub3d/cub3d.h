@@ -19,11 +19,25 @@
 # define RED 0x00FF0000
 # define BLACK 0x00000000
 
+// # define KEY_W 0
+// # define KEY_A 13
+// # define KEY_S 2
+// # define KEY_D 1
+// # define ESC 53
+
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
 # define ESC 53
+
+#define screenWidth 640
+#define screenHeight 480
+#define mapWidth 24
+#define mapHeight 24
+
+# define KEY_LEFT		123
+# define KEY_RIGHT		124
 
 typedef struct	s_win //структура для окна
 {
@@ -38,12 +52,21 @@ typedef struct	s_win //структура для окна
 
 typedef struct	s_player //структура для окна
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 	bool W;
 	bool A;
 	bool S;
 	bool D;
+	double dir;
+	double start;
+	double end;
+	double	dir_x;
+	double	dir_y;
+	double plane_x;
+	double plane_y;
+	double move_speed;
+	struct 	s_data *data;
 }				  t_player;
 
 typedef	struct 	s_data
@@ -61,6 +84,7 @@ typedef	struct 	s_data
 	char	**map;
 	t_win	*win;
 	t_player *player;
+	int map_h;
 }				t_data;
 
 
@@ -76,5 +100,7 @@ void	malloc_error();
 
 // src/mini_map.c
 void mini_map_draw(t_data *data);
+void	my_mlx_pixel_put(t_win *window, int x, int y, int color, int ajaraguju);
 
+void nazvanie_pridumayu_potom(t_data *data);
 #endif

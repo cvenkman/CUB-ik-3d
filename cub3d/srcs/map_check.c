@@ -349,6 +349,7 @@ char	**list_to_map(t_list **map_list, int size, t_data *data)
 		if (k > 5)
 		{
 			map[i] = list_to_string(tmp->content);
+			data->map_h++;
 			i++;
 		}
 		tmp = tmp->next;
