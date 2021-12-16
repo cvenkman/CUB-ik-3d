@@ -36,8 +36,8 @@
 #define mapWidth 24
 #define mapHeight 24
 
-# define KEY_LEFT		123
-# define KEY_RIGHT		124
+# define KEY_ARR_L		123
+# define KEY_ARR_R		124
 
 typedef struct	s_win //структура для окна
 {
