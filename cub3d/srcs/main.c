@@ -56,34 +56,52 @@ int	main(int argc, char **argv)
 	close(fd);
 data.win = malloc(sizeof(t_win) * 1);
 data.player = malloc(sizeof(t_player) * 1);
-	data.map = list_to_map(&map_list, ft_lstsize(map_list), &data);//получился двумерный массив и в дате все текстуры
+	map = list_to_map(&map_list, ft_lstsize(map_list), &data);//получился двумерный массив и в дате все текстуры
 	int i = 0;
 
 	//убираю N в карте и записываю координаты игрока
-	// data.map = malloc(sizeof(char *) * (data.map_h + 1));
-	// i = 0;
-	// int j;
-	// while (map[i])
+	data.map = malloc(sizeof(char *) * (data.map_h + 1));
+	i = 0;
+	int j;
+	while (map[i])
+	{
+		j = 0;
+		data.map[i] = malloc(sizeof(char) * (ft_strlen(map[i]) + 1));
+		while (map[i][j])
+		{
+			if (ft_strchr("NSWE", map[i][j]))
+			{
+				data.player->y = j + 0.5;
+				data.player->x = i + 0.5;
+				data.map[i][j] = '0';
+			}
+			else
+				data.map[i][j] = map[i][j];
+			j++;
+		}
+		data.map[i][j] = '\0';
+		i++;
+	}
+	data.map[i] = NULL;
+	// int u = 0;
+	// int a = 0;
+	// while (data.map[u])
 	// {
-	// 	j = 0;
-	// 	data.map[i] = malloc(sizeof(char) * (ft_strlen(map[i]) + 1));
-	// 	while (map[i][j])
+	// 	a = 0;
+	// 	while (data.map[u][a])
 	// 	{
-	// 		if (map[i][j] == 'N')
+	// 		if (data.map[u][a] == 'N')
 	// 		{
-	// 			data.player->y = i;
-	// 			data.player->x = j;
-	// 			data.map[i][j] = '0';
+	// 			data.player->x = a + 0.5;
+	// 			data.player->y = u + 0.5;
 	// 		}
-	// 		else
-	// 			data.map[i][j] = map[i][j];
-	// 		j++;
+	// 		a++;
 	// 	}
-	// 	data.map[i][j] = '\0';
-	// 	i++;
+	// 	u++;
 	// }
-	// data.map[i] = NULL;
-data.player->data = &data;
+	// data.player->x = 19 + 0.5;
+	// data.player->y = 18 + 0.5;
+	data.player->data = &data;
 	printf("%f %f\n", data.player->data->player->x, data.player->data->player->y);
 	// i = 0;
 	// while (data.map[i])

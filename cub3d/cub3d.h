@@ -84,7 +84,7 @@ typedef	struct 	s_data
 	char	**map;
 	t_win	*win;
 	t_player *player;
-	int map_h;
+	int	map_h;
 }				t_data;
 
 

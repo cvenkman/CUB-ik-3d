@@ -69,8 +69,24 @@ void	verLine(t_win *info, int x, int y1, int y2, int color)
 	// my_mlx_pixel_put2(info, x, b, 13120100);
 }
 
+void	print_map(char ** map){						//////////////// to delete!!!!!!!!!!!!!!!!!!
+	int	x;
+	int y;
+
+	y = -1;
+	while(map[++y])
+	{
+		x = -1;
+		while(map[y][++x]){
+			write(1, &map[y][x], 1);
+		}
+		write(1, "\n", 1);
+	}
+}
+
 int foo(t_player *player)
 {
+	print_map(player->data->map);
 	int x = 0;
 	while (x < screenWidth)
 	{
@@ -195,20 +211,6 @@ int foo(t_player *player)
 
 int	key(int keycode, t_player *player)
 {
-	// t_player *palyer = data->pla 
-	// data->player->W = false;
-	// data->player->A = false;
-	// data->player->S = false;
-	// data->player->D = false;
-	// if (keycode == KEY_W)
-	// 	data->player->W = true;
-	// if (keycode == KEY_A)
-	// 	data->player->A = true;
-	// if (keycode == KEY_S)
-	// 	data->player->S = true;
-	// if (keycode == KEY_D)
-	// 	data->player->D = true;
-	// foo(data->player);
 	//move forward if no wall in front of you
 	if (keycode == KEY_W)
 	{
@@ -271,11 +273,23 @@ int	key(int keycode, t_player *player)
 
 void nazvanie_pridumayu_potom(t_data *data)
 {
-	data->player->dir_x = -1;
+	data->player->dir_x = -1; // w
 	data->player->dir_y = 0;
-	// printf("%f %f\n", data->player->x, data->player->y);
-	data->player->x = 19;
-	data->player->y = 18;
+	// if (data->player_dir == 'E')
+	// 	data->player->dir_x = 1;
+	// else if (data->player_dir == 'N')
+	// {
+	// 	data->player->dir_x = 0;
+	// 	data->player->dir_y = 1;
+	// }
+	// else if (data->player_dir == 'S')
+	// {
+	// 	data->player->dir_x = 0;
+	// 	data->player->dir_y = -1;
+	// }
+	printf("%f %f\n", data->player->x, data->player->y);
+	// data->player->x = 11 + 0.5;
+	// data->player->y = 27 + 0.5;
 	data->player->plane_x = 0;
 	data->player->plane_y = 0.66;
 	foo(data->player);

@@ -13,7 +13,7 @@ OBJS = $(addprefix srcs/,$(SRCS:.c=.o))
 
 CC = gcc
 
-CFLAGS =
+CFLAGS = -g
 
 FT = -L libft -lft
 
