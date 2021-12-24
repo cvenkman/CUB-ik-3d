@@ -4,7 +4,7 @@ SRCS =	main.c \
 		map_check.c \
 		get_next_line.c \
 		mini_map.c \
-		q.c
+		q.c keys.c
 #nazvanie_pridumayu_potom.c	
 
 SRCS_PATH = srcs/

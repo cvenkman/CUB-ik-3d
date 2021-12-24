@@ -14,6 +14,14 @@
 #include <sys/errno.h>
 # include <stdbool.h>
 # include "mlx/mlx.h"
+#include <math.h>
+
+// #define w screenWidth
+// #define h screenHeight
+
+#define SPEED 0.15
+#define ROT_SPEED 0.05 // SPEED / 3.0
+
 
 # define PINK 0x00F000F0
 # define RED 0x00FF0000
@@ -50,14 +58,20 @@ typedef struct	s_win //структура для окна
 	int		endian;
 }				  t_win;
 
+typedef struct s_tmp_value
+{
+	int step_x;
+	int step_y;
+	double side_dist_x;
+	double side_dist_y;
+	int map_x;
+	int map_y;
+}				t_tmp_value;
+
 typedef struct	s_player //структура для окна
 {
 	double	x;
 	double	y;
-	bool W;
-	bool A;
-	bool S;
-	bool D;
 	double dir;
 	double start;
 	double end;
@@ -67,6 +81,7 @@ typedef struct	s_player //структура для окна
 	double plane_y;
 	double move_speed;
 	struct 	s_data *data;
+	t_tmp_value *temp_value;
 }				  t_player;
 
 typedef	struct 	s_data
@@ -103,4 +118,6 @@ void mini_map_draw(t_data *data);
 void	my_mlx_pixel_put(t_win *window, int x, int y, int color, int ajaraguju);
 
 void nazvanie_pridumayu_potom(t_data *data);
+int	key(int keycode, t_player *player);
+int foo(t_player *player);
 #endif

@@ -1,11 +1,4 @@
 #include "../cub3d.h"
-#include <math.h>
-
-#define w screenWidth
-#define h screenHeight
-
-#define SPEED 0.15
-#define ROT_SPEED 0.05 // SPEED / 3.0
 
 // char player->data->map[mapWidth][mapHeight]=
 // {
@@ -49,11 +42,6 @@ void	verLine(t_win *info, int x, int y1, int y2, int color)
 
 	y = y1;
 	int z = y1;
-	while (y <= y2)
-	{
-		my_mlx_pixel_put2(info, x, y, color);
-		y++;
-	}
 	int b = 0;
 	while (b != z)
 	{
@@ -66,27 +54,74 @@ void	verLine(t_win *info, int x, int y1, int y2, int color)
 		my_mlx_pixel_put2(info, x, b, 13120100);
 		b++;
 	}
-	// my_mlx_pixel_put2(info, x, b, 13120100);
+	while (y <= y2)
+	{
+		my_mlx_pixel_put2(info, x, y, color);
+		y++;
+	}
 }
 
-void	print_map(char ** map){						//////////////// to delete!!!!!!!!!!!!!!!!!!
-	int	x;
-	int y;
-
-	y = -1;
-	while(map[++y])
+void ft_step(t_tmp_value *tmp_value, double ray_dir_x, double ray_dir_y, t_player *player)
+{
+	int mapX = (int)player->x;
+	int mapY = (int)player->y;
+	double deltaDistX = fabs(1 / ray_dir_x);
+	double deltaDistY = fabs(1 / ray_dir_y);
+	if(ray_dir_x < 0)
 	{
-		x = -1;
-		while(map[y][++x]){
-			write(1, &map[y][x], 1);
-		}
-		write(1, "\n", 1);
+		tmp_value->step_x = -1;
+		tmp_value->side_dist_x = (player->x - mapX) * deltaDistX;
 	}
+	else
+	{
+		tmp_value->step_x = 1;
+		tmp_value->side_dist_x = (mapX + 1.0 - player->x) * deltaDistX;
+	}
+	if(ray_dir_y < 0)
+	{
+		tmp_value->step_y = -1;
+		tmp_value->side_dist_y = (player->y - mapY) * deltaDistY;
+	}
+	else
+	{
+		tmp_value->step_y = 1;
+		tmp_value->side_dist_y = (mapY + 1.0 - player->y) * deltaDistY;
+	}
+}
+
+int check_hit(t_tmp_value *tmp_value, t_player *player, double ray_dir_x, double ray_dir_y)
+{
+	double deltaDistX = fabs(1 / ray_dir_x);
+	double deltaDistY = fabs(1 / ray_dir_y);
+	int hit = 0; //was there a wall hit?
+	int side;
+
+	while(hit == 0)
+	{
+		//jump to next map square, either in x-direction, or in y-direction
+		if(tmp_value->side_dist_x < tmp_value->side_dist_y)
+		{
+			tmp_value->side_dist_x += deltaDistX;
+			tmp_value->map_x += tmp_value->step_x;
+			side = 0;
+		}
+		else
+		{
+			tmp_value->side_dist_y += deltaDistY;
+			tmp_value->map_y += tmp_value->step_y;
+			side = 1;
+		}
+		//Check if ray has hit a wall
+		if (player->data->map[tmp_value->map_x][tmp_value->map_y] == '1')
+			hit = 1;
+	}
+	return (side);
 }
 
 int foo(t_player *player)
 {
-	print_map(player->data->map);
+	t_tmp_value *tmp_value = malloc(sizeof(t_tmp_value) * 1);
+	ft_bzero(tmp_value, sizeof(t_tmp_value));
 	int x = 0;
 	while (x < screenWidth)
 	{
@@ -94,76 +129,27 @@ int foo(t_player *player)
 		double cameraX = 2 * x / (double)screenWidth - 1; //x-coordinate in camera space
 		double rayDirX = player->dir_x + player->plane_x * cameraX;
 		double rayDirY = player->dir_y + player->plane_y * cameraX;
-		//which box of the map we're in
-		// printf("%f %f\n", player->x, player->y);
-
-		double sideDistX;
-		double sideDistY;
 		
 		double deltaDistX = fabs(1 / rayDirX);
 		double deltaDistY = fabs(1 / rayDirY);
 
 		double perpWallDist;
 
-		//what direction to step in x or y-direction (either +1 or -1)
-		int stepX;
-		int stepY;
-		int hit = 0; //was there a wall hit?
+		
 		int side; //was a NS or a EW wall hit?
-		//calculate step and initial sideDist
-		int mapX = (int)player->x;
-		int mapY = (int)player->y;
-		if(rayDirX < 0)
-		{
-			stepX = -1;
-			sideDistX = (player->x - mapX) * deltaDistX;
-		}
-		else
-		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - player->x) * deltaDistX;
-		}
-		if(rayDirY < 0)
-		{
-			stepY = -1;
-			sideDistY = (player->y - mapY) * deltaDistY;
-		}
-		else
-		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - player->y) * deltaDistY;
-		}
-		//perform DDA
-		while(hit == 0)
-		{
-			//jump to next map square, either in x-direction, or in y-direction
-			if(sideDistX < sideDistY)
-			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				side = 0;
-			}
-			else
-			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				side = 1;
-			}
-			//Check if ray has hit a wall
-			if (player->data->map[mapX][mapY] == '1' || player->data->map[mapX][mapY] == 'N')
-				hit = 1;
-		}
-		// if (side == 0)
-		// 	perpWallDist = (mapX - player->x + (1 - stepX) / 2) / rayDirX;
-		// else
-		// 	perpWallDist = (mapY - player->y + (1 - stepY) / 2) / rayDirY;
+	
+		tmp_value->map_x = (int)player->x;
+		tmp_value->map_y = (int)player->y;
+		ft_step(tmp_value, rayDirX, rayDirY, player);
+
+		side = check_hit(tmp_value, player, rayDirX, rayDirY);
+
 		if(side == 0)
-			perpWallDist = (sideDistX - deltaDistX);
+			perpWallDist = (tmp_value->side_dist_x - deltaDistX);
 		else
-			perpWallDist = (sideDistY - deltaDistY);
+			perpWallDist = (tmp_value->side_dist_y - deltaDistY);
 		//Calculate height of line to draw on screen
 		int lineHeight = (int)(screenHeight / perpWallDist);
-
 		//calculate lowest and highest pixel to fill in current stripe
 		int drawStart = -lineHeight / 2 + screenHeight / 2;
 		if (drawStart < 0)
@@ -180,94 +166,11 @@ int foo(t_player *player)
 		if (side == 1)
 			color = color / 2;
 		int z = drawStart;
-		//draw the pixels of the stripe as a vertical line
-		// printf("%d %d %d\n", drawStart, drawEnd, lineHeight);
 		verLine(player->data->win, x, drawStart, drawEnd, color);
-		// while (drawStart <= drawEnd)
-		// {
-		// 	my_mlx_pixel_put2(player->data->win, x, drawStart, color);
-		// 	drawStart++;
-		// }
-		// int b = 0;
-		// while (b != z)
-		// {
-		// 	my_mlx_pixel_put2(player->data->win, x, b, 16777215);
-		// 	b++;
-		// }
-		// b = drawEnd;
-		// while (b != screenHeight)
-		// {
-		// 	my_mlx_pixel_put2(player->data->win, x, b, 16776960);
-		// 	b++;
-		// }
 		x++;
 	}
 	
 	mlx_put_image_to_window(player->data->win->mlx, player->data->win->win, player->data->win->img, 0, 0);
-	// mlx_destroy_image(player->data->win->mlx, player->data->win->img);
-	return 1;
-}
-
-
-int	key(int keycode, t_player *player)
-{
-	//move forward if no wall in front of you
-	if (keycode == KEY_W)
-	{
-		if (player->data->map[(int)(player->x + player->dir_x * SPEED)][(int)(player->y)] == '0')
-			player->x += player->dir_x * SPEED;
-		if (player->data->map[(int)(player->x)][(int)(player->y + player->dir_y * SPEED)] == '0')
-			player->y += player->dir_y * SPEED;
-	}
-	if (keycode == KEY_A)
-	{
-		if (player->data->map[(int)(player->x - player->plane_x * SPEED)][(int)(player->y)] == '0')
-			player->x -= player->plane_x * SPEED;
-		if (player->data->map[(int)(player->x)][(int)(player->y - player->plane_y * SPEED)] == '0')
-			player->y -= player->plane_y * SPEED;
-	}
-	//move backwards if no wall behind you
-	if (keycode == KEY_S)
-	{
-		if (player->data->map[(int)(player->x - player->dir_x * SPEED)][(int)(player->y)] == '0')
-			player->x -= player->dir_x * SPEED;
-		if (player->data->map[(int)(player->x)][(int)(player->y - player->dir_x * SPEED)] == '0')
-			player->y -= player->dir_y * SPEED;
-	}
-	if (keycode == KEY_D)
-	{
-		if (player->data->map[(int)(player->x + player->plane_x * SPEED)][(int)(player->y)] == '0')
-			player->x += player->plane_x * SPEED;
-		if (player->data->map[(int)(player->x)][(int)(player->y + player->plane_y * SPEED)] == '0')
-			player->y += player->plane_y * SPEED;
-	}
-    // double rotSpeed = SPEED / 3.0; //the constant value is in radians/second
-
-    if(keycode == KEY_ARR_R) 
-    {
-		//both camera direction and camera plane must be rotated
-		double oldDirX = player->dir_x;
-		player->dir_x = player->dir_x * cos(-ROT_SPEED) - player->dir_y * sin(-ROT_SPEED);
-		player->dir_y = oldDirX * sin(-ROT_SPEED) + player->dir_y * cos(-ROT_SPEED);
-		double oldPlaneX = player->plane_x;
-		player->plane_x = player->plane_x * cos(-ROT_SPEED) - player->plane_y * sin(-ROT_SPEED);
-		player->plane_y = oldPlaneX * sin(-ROT_SPEED) + player->plane_y * cos(-ROT_SPEED);
-    }
-    //rotate to the left
-    if (keycode == KEY_ARR_L)
-    {
-		//both camera direction and camera plane must be rotated
-		double oldDirX = player->dir_x;
-		player->dir_x = player->dir_x * cos(ROT_SPEED) - player->dir_y * sin(ROT_SPEED);
-		player->dir_y = oldDirX * sin(ROT_SPEED) + player->dir_y * cos(ROT_SPEED);
-		double oldPlaneX = player->plane_x;
-		player->plane_x = player->plane_x * cos(ROT_SPEED) - player->plane_y * sin(ROT_SPEED);
-		player->plane_y = oldPlaneX * sin(ROT_SPEED) + player->plane_y * cos(ROT_SPEED);
-    }
-	if (keycode == 53)
-		exit(0);
-	printf("%d\n", keycode);
-	foo(player);
 	return 1;
 }
 
