@@ -57,28 +57,28 @@ void	fill_data(t_data *data, char *content)
 		i += 2;
 		while (content[i] == ' ')
 			i++;
-		data->so = ft_strdup((content + i));
+		data->way_to_file_so = ft_strdup((content + i));
 	}
 	else if (content[i] == 'N' && content[i + 1] == 'O' && content[i + 2] == ' ')
 	{
 		i += 2;
 		while (content[i] == ' ')
 			i++;
-		data->no = ft_strdup((content + i));
+		data->way_to_file_no = ft_strdup((content + i));
 	}
 	else if (content[i] == 'W' && content[i + 1] == 'E' && content[i + 2] == ' ')
 	{
 		i += 2;
 		while (content[i] == ' ')
 			i++;
-		data->we = ft_strdup((content + i));
+		data->way_to_file_we = ft_strdup((content + i));
 	}
 	else if (content[i] == 'E' && content[i + 1] == 'A' && content[i + 2] == ' ')
 	{
 		i += 2;
 		while (content[i] == ' ')
 			i++;
-		data->ea = ft_strdup((content + i));
+		data->way_to_file_ea = ft_strdup((content + i));
 	}
 	else if (content[i] == 'F' && content[i + 1] == ' ')
 	{

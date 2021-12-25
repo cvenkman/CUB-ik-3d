@@ -1,11 +1,7 @@
-SO             ./path_to_the_south_texture
-
-
-          NO ./path_to_the_north_texture
-
-WE ./path_to_the_west_texture
-
-EA             ./path_to_the_east_texture
+SO ./image_xpm/1.xpm
+NO ./image_xpm/2.xpm
+WE ./image_xpm/3.xpm
+EA ./image_xpm/1.xpm
 
 
 
@@ -37,6 +33,8 @@ EA             ./path_to_the_east_texture
  
  
  
- 111111
- 100001
- 111111
+ 11111111111
+ 10001111111
+ 10000000001
+ 10000111111
+ 11111111111
