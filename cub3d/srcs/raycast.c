@@ -73,9 +73,9 @@ int raycasting(t_player *player)
 		player->wall_x -= floor((player->wall_x));
 
 		player->tex_x = (int)(player->wall_x * (double)TEX_WIDTH);
-		// if (player->side == 0 && player->ray_dir_x > 0)
-		// 	player->tex_x = TEX_WIDTH - player->tex_x - 1;
-		// if (player->side == 1 && player->ray_dir_y < 0) // ?? same
+		if (player->side == 0 && player->ray_dir_x > 0)
+			player->tex_x = TEX_WIDTH - player->tex_x - 1;
+		if (player->side == 1 && player->ray_dir_y < 0) // ?? same
 			player->tex_x = TEX_WIDTH - player->tex_x - 1;
 
 		player->step = 1.0 * TEX_HEIGHT / player->line_height;

@@ -19,14 +19,15 @@ static void draw_floor_and_сeiling(int y_start, int y_end, t_win *info, int x, 
 	int b = 0;
 	while (b < y_start)
 	{
-		my_mlx_pixel_put(info, x, b, 16777215);
+		// my_mlx_pixel_put(info, x, b, 16777215);
+		my_mlx_pixel_put(info, x, b, data->f);
 		b++;
 	}
 	b = print_texture(data->player, b, x);
 	// b = y_end;
 	while (b < SCREEN_H)
 	{
-		my_mlx_pixel_put(info, x, b, 13120100);
+		my_mlx_pixel_put(info, x, b, data->c);
 		b++;
 	}
 }

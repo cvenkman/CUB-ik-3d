@@ -33,14 +33,14 @@
 # define KEY_D 2
 # define ESC 53
 
-#define SCREEN_W 640
-#define SCREEN_H 480
-#define screenWidth 640
-#define screenHeight 480
-#define mapWidth 24
-#define mapHeight 24
-#define TEX_WIDTH 64
-#define TEX_HEIGHT 64
+#define SCREEN_W 1920
+#define SCREEN_H 1080
+// #define screenWidth 640
+// #define screenHeight 480
+// #define mapWidth 24
+// #define mapHeight 24
+#define TEX_WIDTH 128
+#define TEX_HEIGHT 128
 
 # define KEY_ARR_L		123
 # define KEY_ARR_R		124
@@ -137,6 +137,8 @@ typedef	struct 	s_data
 	char	*cl;//vremenno -  ne uzat posle pars
 	int		floor[3];
 	int		ceil[3];
+	int f;
+	int c;
 	char	player_dir;
 	int		player_pos[2];
 	char	**map;

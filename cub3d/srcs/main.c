@@ -23,8 +23,8 @@ int	main(int argc, char **argv)
 	// int g = 255;
 	// int b = 0;
 	// // хуйню строчкой ниже нужно куда-нибудь засунуть
-	// // int color = (data.floor[2] << 16) + (data.floor[1] << 8) + data.floor[0];
-	// // int color2 = (data.ceil[2] << 16) + (data.ceil[1] << 8) + data.ceil[0];
+	data.f = (data.floor[2] << 16) + (data.floor[1] << 8) + data.floor[0];
+	data.c = (data.ceil[2] << 16) + (data.ceil[1] << 8) + data.ceil[0];
 	// // int color = (r << 16) + (g << 8) + b;
 	start_raycasting(&data);
 	// mlx_loop(data.win->mlx);
