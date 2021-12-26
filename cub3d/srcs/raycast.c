@@ -88,7 +88,7 @@ int raycasting(t_player *player)
 		draw_verLine(player->data->win, x, player->draw_start, player->draw_end, player->data, color);
 		x++;
 	}
-	image_to_image_cp(player->data->win, &player->data->img_map, point_set(0, 0));
+	// image_to_image_cp(player->data->win, &player->data->img_map, point_set(0, 0));
 	mlx_put_image_to_window(player->data->win->mlx, player->data->win->win, player->data->win->img, 0, 0);
 	return 1;
 }

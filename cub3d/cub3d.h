@@ -1,54 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cvenkman <cvenkman@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/26 14:13:27 by cvenkman          #+#    #+#             */
+/*   Updated: 2021/12/26 14:13:47 by cvenkman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef	CUB3D_H
 # define CUB3D_H
+
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <string.h>
+# include <fcntl.h>
+# include "libft/libft.h"
+# include <sys/errno.h>
+# include <stdbool.h>
+# include "mlx/mlx.h"
+# include <math.h>
 
 # define STD_ERR 2
 # define STD_OUT 1
 # define BUFFER_SIZE 10
+# define SPEED		0.11 * 1.2
+# define ROT_SPEED	0.05
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <fcntl.h>
-#include "libft/libft.h"
-#include <sys/errno.h>
-# include <stdbool.h>
-# include "mlx/mlx.h"
-#include <math.h>
+# define KEY_W	13
+# define KEY_A	0
+# define KEY_S	1
+# define KEY_D	2
+# define ESC	53
 
-// #define w screenWidth
-// #define h screenHeight
+# define SCREEN_W	1920
+# define SCREEN_H	1080
 
-#define SPEED 0.15
-#define ROT_SPEED 0.05 // SPEED / 3.0
+#define TEX_WIDTH	128
+#define TEX_HEIGHT	128
 
-
-# define PINK 0x00F000F0
-# define RED 0x00FF0000
-# define BLACK 0x00000000
-
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define ESC 53
-
-#define SCREEN_W 1920
-#define SCREEN_H 1080
-// #define screenWidth 640
-// #define screenHeight 480
-// #define mapWidth 24
-// #define mapHeight 24
-#define TEX_WIDTH 128
-#define TEX_HEIGHT 128
-
-# define KEY_ARR_L		123
-# define KEY_ARR_R		124
+# define KEY_ARR_L	123
+# define KEY_ARR_R	124
 typedef struct s_point
 {
-	int		x;
-	int		y;
-}	t_point;
+	int	x;
+	int	y;
+}				t_point;
 typedef struct	s_win //структура для окна
 {
 	void	*mlx;
@@ -59,41 +59,25 @@ typedef struct	s_win //структура для окна
 	int		line_length;
 	int		endian;
 	t_point size_img;
-	// int		size_img_x;
-	// int		size_img_y;
-}				  t_win;
-
-// typedef struct s_tmp_value
-// {
-// 	// int step_x;
-// 	// int step_y;
-// 	// double side_dist_x;
-// 	// double side_dist_y;
-// 	// int map_x;
-// 	// int map_y;
-// }				t_tmp_value;
-
+}				t_win;
 
 typedef struct	s_player //структура для окна
 {
 	double	x;
 	double	y;
-	// double dir;
-	// double start;
-	// double end;
 	double	dir_x;
 	double	dir_y;
-	double plane_x;
-	double plane_y;
-	int side;
+	double	plane_x;
+	double 	plane_y;
+	int		side;
 	int		draw_start;
-	int line_height;
+	int		line_height;
 	int		draw_end;
 	double	step;
-	int step_x;
-	int step_y;
-	double side_dist_x;
-	double side_dist_y;
+	int		step_x;
+	int		step_y;
+	double	side_dist_x;
+	double	side_dist_y;
 	double	delta_dist_x;
 	double	delta_dist_y;
 	double	perp_wall_dist;
@@ -101,29 +85,23 @@ typedef struct	s_player //структура для окна
 	double	wall_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
-	int map_x;
-	int map_y;
+	int		map_x;
+	int		map_y;
 	double	tex_pos;
-	// double move_speed;
-	struct 	s_data *data;
-	// t_tmp_value *temp_value;
-}				  t_player;
+	struct	s_data *data;
+}				t_player;
 
 
 typedef struct s_texture
 {
-	int		n;
-	int		s;
-	int		w;
-	int		e;
-	int		**north;
-	int		**south;
-	int		**west;
-	int		**east;
-	// char	*no;
-	// char	*so;
-	// char	*we;
-	// char	*ea;
+	int	n;
+	int	s;
+	int	w;
+	int	e;
+	int	**north;
+	int	**south;
+	int	**west;
+	int	**east;
 }	t_texture;
 
 
