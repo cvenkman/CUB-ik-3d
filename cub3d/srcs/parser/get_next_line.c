@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rloyce <rloyce@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cvenkman <cvenkman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 00:30:35 by rloyce            #+#    #+#             */
-/*   Updated: 2021/11/24 21:02:09 by rloyce           ###   ########.fr       */
+/*   Updated: 2021/12/26 20:14:22 by cvenkman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 int	error_free(char *remain, char *buf, int i)
 {
