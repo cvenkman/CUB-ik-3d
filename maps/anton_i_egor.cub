@@ -1,8 +1,7 @@
-SO ./image_xpm/7.xpm
-NO ./image_xpm/7.xpm
-WE ./image_xpm/mini_medved.xpm
-EA ./image_xpm/7.xpm
-
+SO ./image_xpm/gey.xpm
+NO ./image_xpm/felix.xpm
+WE ./image_xpm/bust.xpm
+EA ./image_xpm/12.xpm
 
 
 C 60, 72, 112
