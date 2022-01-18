@@ -1,6 +1,6 @@
 ## cub3d
 
-``with [Vova](https://github.com/delakruel) :)``
+``with [Vova](https://github.com/delakruel/) :)``
 
 Raycasting game (almost a game)
 
