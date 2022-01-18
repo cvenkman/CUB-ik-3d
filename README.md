@@ -1,5 +1,7 @@
 ## cub3d
 
+``with https://github.com/delakruel``
+
 Raycasting game (almost a game)
 
 ### Compiling
