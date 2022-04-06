@@ -24,4 +24,4 @@ Raycasting game (almost a game)
 
 What it looks like:
 
-![screen](screen.png)
+![screen](img_for_readme/screen.png)
