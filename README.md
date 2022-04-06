@@ -1,8 +1,8 @@
 ## cub3d
 
-with [Vova](https://github.com/delakruel/) :)
+Raycasting game (almost a game) from a first-person perspective.
 
-Raycasting game (almost a game)
+with [Vova](https://github.com/delakruel/) :)
 
 ### Compiling
 
@@ -17,7 +17,7 @@ Raycasting game (almost a game)
 
 ### Executing
 
-`./cub3d maps/test.cub`
+`./cub3d maps/map.cub`
 
 * ``WASD`` to move, ``Left/Right`` directional keys to rotate camera
 * ``ESC`` to quit
