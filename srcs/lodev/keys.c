@@ -6,7 +6,7 @@
 /*   By: cvenkman <cvenkman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 20:18:19 by cvenkman          #+#    #+#             */
-/*   Updated: 2021/12/26 20:23:16 by cvenkman         ###   ########.fr       */
+/*   Updated: 2022/04/06 03:24:31 by cvenkman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	key_l_arr(t_player *player);
 static void	key_r_arr(t_player *player);
+static int close_exit(void);
 
 int	key(int keycode, t_player *player)
 {
@@ -30,8 +31,15 @@ int	key(int keycode, t_player *player)
 	if (keycode == KEY_ARR_L)
 		key_l_arr(player);
 	if (keycode == 53)
-		exit(0);
+		close_exit();
 	raycasting(player);
+	return (1);
+}
+
+static int close_exit(void)
+{
+	ft_putstr_fd("Exit\n", 0);
+	exit (EXIT_SUCCESS);
 	return (1);
 }
 

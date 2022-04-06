@@ -1,13 +1,12 @@
-SO ./image_xpm/gey.xpm
+SO ./image_xpm/12.xpm
 NO ./image_xpm/felix.xpm
-WE ./image_xpm/bust.xpm
-EA ./image_xpm/12.xpm
+WE ./image_xpm/12.xpm
+EA ./image_xpm/medved.xpm
 
-
-
-C 209, 0, 255
 
 F 203, 192, 152
+
+C 209,183,255
 
 
         1111111111111111111111111

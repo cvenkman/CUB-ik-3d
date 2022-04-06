@@ -21,3 +21,7 @@ Raycasting game (almost a game)
 
 * ``WASD`` to move, ``Left/Right`` directional keys to rotate camera
 * ``ESC`` to quit
+
+What it looks like:
+
+![screen](screen.png)
